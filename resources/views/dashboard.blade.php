@@ -59,6 +59,11 @@
         .page-link.active { background: #111827; border-color: #111827; color: #fff; }
         .page-link.disabled { color: #9ca3af; background: #f3f4f6; border-color: #e5e7eb; cursor: not-allowed; }
         .empty-state { text-align: center; padding: 3rem 1rem; background: #fff; border-radius: 14px; border: 1px solid #e5e7eb; color: #6b7280; }
+        .stats-grid { display: grid; gap: 0.85rem; margin-bottom: 1rem; }
+        .stats-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1rem 1.1rem; box-shadow: 0 12px 20px rgba(15, 23, 42, 0.06); display: grid; gap: 0.4rem; }
+        .stats-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6b7280; }
+        .stats-value { font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 700; color: #111827; }
+        .stats-meta { font-size: 0.88rem; color: #6b7280; }
         .applications-cards { display: none; gap: 1rem; }
         .application-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.2rem; box-shadow: 0 12px 22px rgba(15, 23, 42, 0.06); display: grid; gap: 1rem; }
         .card-section { display: grid; gap: 0.5rem; }
@@ -94,6 +99,18 @@
 
             .filter-bar input {
                 min-width: 0;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
             }
         }
 
@@ -206,6 +223,28 @@
 </div>
 
 <div class="admin-container">
+    <div class="stats-grid">
+        <div class="stats-card">
+            <div class="stats-label">Total Applications</div>
+            <div class="stats-value">{{ number_format($stats['total_applications']) }}</div>
+            <div class="stats-meta">Personal {{ number_format($stats['personal_count']) }} · Business {{ number_format($stats['business_count']) }}</div>
+        </div>
+        <div class="stats-card">
+            <div class="stats-label">Total Requested</div>
+            <div class="stats-value">KSh {{ number_format($stats['total_requested'], 2) }}</div>
+            <div class="stats-meta">All loan applications</div>
+        </div>
+        <div class="stats-card">
+            <div class="stats-label">Total Approved</div>
+            <div class="stats-value">KSh {{ number_format($stats['approved_total'], 2) }}</div>
+            <div class="stats-meta">Based on 70% approval</div>
+        </div>
+        <div class="stats-card">
+            <div class="stats-label">Average Approved</div>
+            <div class="stats-value">KSh {{ number_format($stats['approved_average'], 2) }}</div>
+            <div class="stats-meta">Approved loans average</div>
+        </div>
+    </div>
     <form method="GET" class="filter-bar">
         <input type="text" name="search" placeholder="Search applications..." value="{{ $search }}">
         <select name="filter">

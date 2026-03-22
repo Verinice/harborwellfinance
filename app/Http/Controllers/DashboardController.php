@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LoanApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\View\View;
@@ -71,6 +72,7 @@ class DashboardController extends Controller
             ->withQueryString();
 
         $totalApplications = $applications->total();
+        $stats = $this->buildStats();
 
         $paginationWindow = 2;
         $currentPage = $applications->currentPage();
@@ -113,6 +115,7 @@ class DashboardController extends Controller
             'total_applications' => $totalApplications,
             'personal_count' => $personalCount,
             'business_count' => $businessCount,
+            'stats' => $stats,
             'page_start' => $pageStart,
             'page_end' => $pageEnd,
         ]);
@@ -289,6 +292,35 @@ class DashboardController extends Controller
         }
 
         return $details;
+    }
+
+    private function buildStats(): array
+    {
+        $totalApplications = LoanApplication::count();
+        $personalCount = LoanApplication::where('purpose', '!=', 'business')->count();
+        $businessCount = LoanApplication::where('purpose', 'business')->count();
+        $totalRequested = (int) LoanApplication::sum('amount');
+
+        $approvedQuery = LoanApplication::where('status', 'approved');
+        $approvedCount = $approvedQuery->count();
+
+        $columns = $this->availableColumns();
+        if ($columns['approved_percentage']) {
+            $approvedTotal = (float) $approvedQuery->sum(DB::raw('amount * approved_percentage / 100'));
+        } else {
+            $approvedTotal = (float) $approvedQuery->sum('amount');
+        }
+
+        $approvedAverage = $approvedCount > 0 ? $approvedTotal / $approvedCount : 0;
+
+        return [
+            'total_applications' => $totalApplications,
+            'personal_count' => $personalCount,
+            'business_count' => $businessCount,
+            'total_requested' => $totalRequested,
+            'approved_total' => $approvedTotal,
+            'approved_average' => $approvedAverage,
+        ];
     }
 
     private function availableColumns(): array

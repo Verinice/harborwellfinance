@@ -5050,3 +5050,15 @@ php artisan admin:create admin@example.com --password="SuperSecurePass123" --for
 - Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
 - Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
 - Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dashboard Stats Cards
+- Added top-of-dashboard stats cards showing totals and approved metrics, matching the prior dashboard overview layout.
+- Stats are computed server-side from `LoanApplication` data.
+- Files: `app/Http/Controllers/DashboardController.php`, `resources/views/dashboard.blade.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
