@@ -82,25 +82,6 @@
 
 
     <script>
-        const navToggle = document.getElementById('navToggle');
-        const nav = document.getElementById('siteNav');
-
-        if (navToggle && nav) {
-            navToggle.addEventListener('click', () => {
-                const isOpen = nav.classList.toggle('is-open');
-                navToggle.setAttribute('aria-expanded', String(isOpen));
-            });
-
-            document.querySelectorAll('#primaryNav a').forEach((link) => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth < 768) {
-                        nav.classList.remove('is-open');
-                        navToggle.setAttribute('aria-expanded', 'false');
-                    }
-                });
-            });
-        }
-
         // Success Stories Slider
         const storiesTrack = document.getElementById('storiesTrack');
         const storiesPrev = document.getElementById('storiesPrev');

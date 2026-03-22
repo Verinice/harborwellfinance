@@ -35,3 +35,35 @@
         </div>
     </div>
 </header>
+<script>
+    (() => {
+        const navToggle = document.getElementById('navToggle');
+        const nav = document.getElementById('siteNav');
+
+        if (!navToggle || !nav) return;
+
+        const closeNav = () => {
+            nav.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        };
+
+        navToggle.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('is-open');
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        document.querySelectorAll('#primaryNav a').forEach((link) => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    closeNav();
+                }
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeNav();
+            }
+        });
+    })();
+</script>

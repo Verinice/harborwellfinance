@@ -4907,3 +4907,39 @@ php artisan admin:create admin@example.com --password="SuperSecurePass123" --for
 - Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
 - Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
 - Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Database Connection Test Script
+- Added a CLI script to validate MySQL connectivity using Railway-style environment variables or standard Laravel `DB_*` values.
+- The script parses `MYSQL_PUBLIC_URL`/`MYSQL_URL` if present and falls back to discrete env vars, then runs a simple `SELECT 1` test.
+- Files: `scripts/test-db-connection.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Mobile Menu Consistency Fix
+- Centralized the mobile menu toggle script in the shared header component so all pages get identical behavior and the correct close icon state.
+- Increased the header stacking order to keep the open mobile menu above page content, including the status page layout.
+- Files: `resources/views/components/landing/header.blade.php`, `resources/views/welcome.blade.php`, `resources/views/calculator.blade.php`, `resources/css/welcome.css`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Mobile Menu Close Icon Fix
+- Corrected the mobile menu toggle animation so it renders a proper close (X) icon when open.
+- Ensures the middle bar hides and the top/bottom bars rotate into a clean, centered X.
+- Files: `resources/css/welcome.css`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
