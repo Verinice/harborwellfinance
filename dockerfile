@@ -6,7 +6,8 @@ WORKDIR /var/www/html
 # System dependencies
 RUN apt-get update && apt-get install -y \
     git unzip libzip-dev libonig-dev curl libicu-dev libxml2-dev \
-    && docker-php-ext-install pdo_mysql mbstring zip intl bcmath
+    && docker-php-ext-install pdo_mysql mbstring zip intl bcmath dom xml xmlwriter \
+    && rm -rf /var/lib/apt/lists/*
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -18,7 +19,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY . .
 
 # Install dependencies
-RUN composer install --optimize-autoloader --no-scripts --no-interaction
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --optimize-autoloader --no-scripts --no-interaction --no-dev
 
 # Storage symlink
 RUN php artisan storage:link || true
