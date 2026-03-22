@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StatusController;
@@ -48,14 +48,10 @@ Route::get('/about', function () {
 
 Route::get('/payment', [PaymentController::class, 'show']);
 
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::post('/dashboard/{application}/status', [DashboardController::class, 'update'])->whereNumber('application');
+Route::post('/dashboard/{application}/delete', [DashboardController::class, 'destroy'])->whereNumber('application');
+
 Route::get('/login', [LoginController::class, 'create'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
-
-Route::get('/admin', [AdminController::class, 'index'])->middleware('auth');
-Route::get('/admin/applications', [AdminController::class, 'applications'])->middleware('auth');
-Route::patch('/admin/applications/{application}/status', [AdminController::class, 'updateStatus'])->middleware('auth');
-Route::delete('/admin/applications/{application}', [AdminController::class, 'destroy'])->middleware('auth');
-Route::get('/admin/users', [AdminController::class, 'users'])->middleware('auth');
-Route::get('/admin/reports', [AdminController::class, 'reports'])->middleware('auth');
-Route::get('/admin/settings', [AdminController::class, 'settings'])->middleware('auth');

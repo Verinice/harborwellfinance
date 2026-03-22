@@ -4943,3 +4943,110 @@ php artisan admin:create admin@example.com --password="SuperSecurePass123" --for
 - Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
 - Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
 - Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dashboard Page (Stawi Finance Admin UI Match)
+- Added a new `/dashboard` page that mirrors the Stawi Finance `/admin` layout, styling, and table presentation.
+- Included static sample rows, filters, and action controls to preserve the exact visual structure.
+- Files: `resources/views/dashboard.blade.php`, `routes/web.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dashboard Data Wiring
+- Wired the `/dashboard` view to real `LoanApplication` data with server-side search, status filtering, loan type filtering, and pagination.
+- Added approve/reject actions that persist status updates and set a fixed 70% approved percentage on approval.
+- Files: `app/Http/Controllers/DashboardController.php`, `resources/views/dashboard.blade.php`, `routes/web.php`, `app/Http/Controllers/Auth/LoginController.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dashboard Mobile Cards
+- Swapped the dashboard table for stacked application cards on small screens to match the provided screenshot layout.
+- Preserved approve/reject actions and status badges within each card while keeping the table for larger screens.
+- Files: `resources/views/dashboard.blade.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dashboard Mobile Pagination
+- Added a mobile-only pagination block below the dashboard cards so small screens retain the same paging controls as desktop.
+- Keeps the table pagination for larger screens while rendering a separate card pagination container for mobile.
+- Files: `resources/views/dashboard.blade.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dashboard Mobile Pagination Condensed
+- Simplified the mobile card pagination to show only Prev/Next controls while keeping full pagination on larger screens.
+- Files: `resources/views/dashboard.blade.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dashboard Ajax Status Actions
+- Added AJAX approve/reject actions with snackbars to avoid full page reloads on the dashboard.
+- Guarded status updates against missing review columns to prevent SQL errors in environments without the latest migrations.
+- Files: `resources/views/dashboard.blade.php`, `app/Http/Controllers/DashboardController.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dashboard Icon Actions + Delete
+- Replaced approve/reject buttons with compact icon actions and added a delete icon button to remove applications.
+- Approve/decline actions are disabled once an application reaches a final status, and delete runs via AJAX.
+- Files: `resources/views/dashboard.blade.php`, `routes/web.php`, `app/Http/Controllers/DashboardController.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Default Admin User Migration
+- Added a migration that seeds a default admin user (`admin@harborwell.com`) with the provided credentials during `migrate`.
+- Uses an idempotent update/insert to avoid duplicates and sets the `role` to `admin` when available.
+- Files: `database/migrations/2026_03_22_000000_create_default_admin_user.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
+
+## Dummy Loan Applications Migration
+- Added a migration that seeds 20 unique loan application records for dashboard testing.
+- Includes a mix of purposes and statuses with distinct tokens, emails, and identity values.
+- Files: `database/migrations/2026_03_22_010000_add_dummy_loan_applications.php`
+
+## Mobile-First Design Instructions
+- Design and implement layouts for mobile screens first, then enhance for larger breakpoints.
+- Use fluid widths (`min()`, `%`, `clamp()`) and avoid fixed pixel widths for primary layout containers.
+- Ensure tap targets are at least 44x44px and provide comfortable spacing between interactive elements.
+- Prioritize vertical flow and readability on small screens; limit multi-column layouts to tablet/desktop breakpoints.
+- Always test key sections at 360px–430px widths and at least one tablet size before finalizing changes.
