@@ -1,0 +1,18 @@
+Fixed rate personal loans => 6% 24months
+
+Emergency loans => 4% => period => 6months max
+
+Business loans => 6% => 24moths max
+
+Asset  loans => 5% => 24moths max
+
+Change buttons to maroon for apply buttons in loan products
+
+Minimum loans 1k
+
+Same loan page products slider as hompeage ui
+
+Account opening and activation fee => Activate
+
+payment = principal * rate * time
+Example: 10000 * 4 * 0.5
