@@ -48,9 +48,9 @@ Route::get('/about', function () {
 
 Route::get('/payment', [PaymentController::class, 'show']);
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::post('/dashboard/{application}/status', [DashboardController::class, 'update'])->whereNumber('application');
-Route::post('/dashboard/{application}/delete', [DashboardController::class, 'destroy'])->whereNumber('application');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::post('/dashboard/{application}/status', [DashboardController::class, 'update'])->whereNumber('application')->middleware('auth');
+Route::post('/dashboard/{application}/delete', [DashboardController::class, 'destroy'])->whereNumber('application')->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'create'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
