@@ -17,13 +17,24 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'string'],
             'password' => ['required'],
         ]);
 
         $remember = $request->boolean('remember');
 
-        if (Auth::attempt($credentials, $remember)) {
+        $login = trim((string) $credentials['email']);
+        $attemptCredentials = [
+            'password' => $credentials['password'],
+        ];
+
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $attemptCredentials['email'] = $login;
+        } else {
+            $attemptCredentials['name'] = $login;
+        }
+
+        if (Auth::attempt($attemptCredentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }

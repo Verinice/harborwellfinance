@@ -33,8 +33,8 @@
                 <form class="apply-form" method="post" action="/login">
                     @csrf
                     <div class="apply-field">
-                        <label for="email">Email address</label>
-                        <input id="email" name="email" type="email" autocomplete="email" value="{{ old('email') }}" required>
+                        <label for="email">Email or username</label>
+                        <input id="email" name="email" type="text" autocomplete="username" value="{{ old('email') }}" required>
                         @error('email')
                             <div class="apply-error">{{ $message }}</div>
                         @enderror
